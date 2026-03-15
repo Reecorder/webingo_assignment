@@ -108,7 +108,7 @@ The main models used by the app are:
 
 ## Key Features Implemented
 
-- **Splash Screen**: Animated branding screen with "Webingo" logo and tagline for app launch experience.
+- Animated branding screen with "Webingo" logo and tagline for app launch experience.
 - Airport lookup (departure + destination)
 - Flight search with filters (airline, price range, stops, aircraft type)
 - Paginated flight listings
