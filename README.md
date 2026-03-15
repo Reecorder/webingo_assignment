@@ -139,11 +139,11 @@ The app implements comprehensive error handling to ensure a smooth user experien
 Approximate total hours taken to build the app with all listed functionality: **40–50 hours**
 
 Breakdown:
-- Project setup and architecture design: 5 hours
-- Implementing flight search, results list, and pagination: 15 hours
-- UI/UX development (screens, widgets, navigation): 15 hours
+- Project setup and architecture design: 2 hours
+- Implementing flight search, results list, and pagination: 3 hours
+- UI/UX development (screens, widgets, navigation): 3 hours
 - API integration, models, and data handling: 8 hours
-- Testing, bug fixes, and polish: 7 hours
+- Testing, bug fixes, and polish: 4 hours
 
 ## Contributing
 
