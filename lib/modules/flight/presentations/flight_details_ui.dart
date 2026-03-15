@@ -1,7 +1,5 @@
-import "package:booking_app/app/widgets/snackbar_helper.dart";
 import "package:flutter/services.dart";
 import "package:gal/gal.dart";
-import 'package:permission_handler/permission_handler.dart';
 import "package:booking_app/app/theme/app_colors.dart";
 import "package:booking_app/app/widgets/background.dart";
 import "package:booking_app/app/widgets/universel_card.dart";
@@ -28,11 +26,7 @@ class _FlightDetailsPageState extends State<FlightDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BackgroundGrad(
-        gradColors: const [
-          Color(0xFFC4C9D5),
-          Color(0xFFE1E1E2),
-          Color(0xFFF0F1F3),
-        ],
+        gradColors: const [Color(0xFFC4C9D5), Color(0xFFE1E1E2), Color(0xFFF0F1F3)],
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -57,18 +51,14 @@ class _FlightDetailsPageState extends State<FlightDetailsPage> {
   Widget _flightdetailsSection() => Obx(() {
     if (flightController.isSearchingFlightDetails.value) {
       return const Expanded(
-        child: Center(
-          child: CircularProgressIndicator(color: AppColors.primary),
-        ),
+        child: Center(child: CircularProgressIndicator(color: AppColors.primary)),
       );
     }
 
     final flight = flightController.selectedFlightDetails.value?.flightDetails;
 
     if (flight == null) {
-      return const Expanded(
-        child: Center(child: Text("Could not load flight details.")),
-      );
+      return const Expanded(child: Center(child: Text("Could not load flight details.")));
     }
 
     return Expanded(
@@ -98,10 +88,7 @@ class _FlightDetailsPageState extends State<FlightDetailsPage> {
     final flight = flightController.selectedFlightDetails.value?.flightDetails;
 
     if (flight == null) {
-      return const SizedBox(
-        height: 230,
-        child: Center(child: CircularProgressIndicator()),
-      );
+      return const SizedBox(height: 230, child: Center(child: CircularProgressIndicator()));
     }
 
     return UniversalTicketCard(
@@ -134,11 +121,7 @@ class _FlightDetailsPageState extends State<FlightDetailsPage> {
                     backgroundColor: Colors.green.shade50,
                     radius: 18,
                     backgroundImage: NetworkImage(flight.airlineLogo),
-                    child: const Icon(
-                      Icons.flight,
-                      color: Colors.green,
-                      size: 20,
-                    ),
+                    child: const Icon(Icons.flight, color: Colors.green, size: 20),
                   ),
                   const SizedBox(width: 10),
 
@@ -161,10 +144,7 @@ class _FlightDetailsPageState extends State<FlightDetailsPage> {
 
             Text(
               flight.flightId,
-              style: TextStyle(
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.w500,
-              ),
+              style: TextStyle(color: Colors.grey.shade500, fontWeight: FontWeight.w500),
             ),
           ],
         ),
@@ -186,8 +166,7 @@ class _FlightDetailsPageState extends State<FlightDetailsPage> {
   // ─── Passenger Info & Barcode ────────────────────────────────────────────────
 
   Widget _passengerInfoCard() => Obx(() {
-    final passengers =
-        flightController.selectedFlightDetails.value?.passengers ?? [];
+    final passengers = flightController.selectedFlightDetails.value?.passengers ?? [];
     final flight = flightController.selectedFlightDetails.value?.flightDetails;
 
     if (passengers.isEmpty) return const SizedBox.shrink();
@@ -204,11 +183,7 @@ class _FlightDetailsPageState extends State<FlightDetailsPage> {
         children: [
           const Text(
             "Passengers Info",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
-            ),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),
           ),
           const SizedBox(height: 16),
 
@@ -246,32 +221,16 @@ class _FlightDetailsPageState extends State<FlightDetailsPage> {
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisSize: MainAxisSize.min,
     children: [
-      Text(
-        title,
-        style: TextStyle(
-          color: Colors.grey.shade500,
-          fontSize: 12,
-          letterSpacing: 0.5,
-        ),
-      ),
+      Text(title, style: TextStyle(color: Colors.grey.shade500, fontSize: 12, letterSpacing: 0.5)),
       const SizedBox(height: 4),
       Text(
         value,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          color: Colors.black87,
-        ),
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black87),
       ),
     ],
   );
 
-  Widget _passengerRow(
-    String label,
-    String name,
-    String seat,
-    String imageUrl,
-  ) => Row(
+  Widget _passengerRow(String label, String name, String seat, String imageUrl) => Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       Row(
@@ -284,11 +243,7 @@ class _FlightDetailsPageState extends State<FlightDetailsPage> {
             children: [
               Text(
                 label,
-                style: TextStyle(
-                  color: Colors.grey.shade500,
-                  fontSize: 10,
-                  letterSpacing: 0.5,
-                ),
+                style: TextStyle(color: Colors.grey.shade500, fontSize: 10, letterSpacing: 0.5),
               ),
               Text(
                 name,
@@ -308,11 +263,7 @@ class _FlightDetailsPageState extends State<FlightDetailsPage> {
         children: [
           Text(
             "SEAT",
-            style: TextStyle(
-              color: Colors.grey.shade500,
-              fontSize: 10,
-              letterSpacing: 0.5,
-            ),
+            style: TextStyle(color: Colors.grey.shade500, fontSize: 10, letterSpacing: 0.5),
           ),
           Text(
             seat,
@@ -354,18 +305,12 @@ class _FlightDetailsPageState extends State<FlightDetailsPage> {
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.black,
           minimumSize: const Size(double.infinity, 56),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
           elevation: 0,
         ),
         child: const Text(
           'Download & Save pass',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
         ),
       ),
     ),

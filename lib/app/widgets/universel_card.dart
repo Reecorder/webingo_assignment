@@ -37,17 +37,11 @@ class UniversalTicketCard extends StatelessWidget {
                   SizedBox(
                     height: dividerPosition,
                     width: double.infinity,
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: topContent,
-                    ),
+                    child: Padding(padding: const EdgeInsets.all(20.0), child: topContent),
                   ),
                   // Bottom Half
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: bottomContent,
-                    ),
+                    child: Padding(padding: const EdgeInsets.all(20.0), child: bottomContent),
                   ),
                 ],
               ),
@@ -120,8 +114,7 @@ class TicketDottedDivider extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(
             dots,
-            (index) =>
-                Container(width: 6, height: 2, color: Colors.grey.shade300),
+            (index) => Container(width: 6, height: 2, color: Colors.grey.shade300),
           ),
         );
       },

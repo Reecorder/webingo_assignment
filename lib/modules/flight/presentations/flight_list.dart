@@ -91,8 +91,7 @@ class FlightResultPage extends StatelessWidget {
     final filters = {
       "airline": _filterAirline.value,
       "price_min": _filterPriceMin.value,
-      "price_max":
-          _filterPriceMax.value == _priceMax ? 0 : _filterPriceMax.value,
+      "price_max": _filterPriceMax.value == _priceMax ? 0 : _filterPriceMax.value,
       "stops": _filterStops.value == -1 ? 0 : _filterStops.value,
       "aircraft_type": _filterAircraftType.value,
     };
@@ -138,11 +137,7 @@ class FlightResultPage extends StatelessWidget {
                           child: Text(
                             "No flights found.\nPull down to try again.",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black54,
-                              height: 1.5,
-                            ),
+                            style: TextStyle(fontSize: 16, color: Colors.black54, height: 1.5),
                           ),
                         ),
                       ],
@@ -152,34 +147,24 @@ class FlightResultPage extends StatelessWidget {
                       onNotification: (ScrollNotification scrollInfo) {
                         if (!isLoadMore &&
                             hasNextPage &&
-                            scrollInfo.metrics.pixels >=
-                                scrollInfo.metrics.maxScrollExtent - 50) {
+                            scrollInfo.metrics.pixels >= scrollInfo.metrics.maxScrollExtent - 50) {
                           flightController.loadMoreFlights();
                           return true;
                         }
                         return false;
                       },
                       child: ListView.separated(
-                        // Forces the list to be scrollable even if there are only 1 or 2 items
                         physics: const AlwaysScrollableScrollPhysics(),
-                        padding: const EdgeInsets.only(
-                          top: 10,
-                          bottom: 40,
-                          left: 5,
-                          right: 5,
-                        ),
+                        padding: const EdgeInsets.only(top: 10, bottom: 40, left: 5, right: 5),
                         itemCount: flights.length + (hasNextPage ? 1 : 0),
-                        separatorBuilder:
-                            (context, index) => const SizedBox(height: 12),
+                        separatorBuilder: (context, index) => const SizedBox(height: 12),
                         itemBuilder: (context, index) {
                           // Pagination Loader at the bottom
                           if (index == flights.length) {
                             return const Padding(
                               padding: EdgeInsets.symmetric(vertical: 20.0),
                               child: Center(
-                                child: CircularProgressIndicator(
-                                  color: AppColors.primary,
-                                ),
+                                child: CircularProgressIndicator(color: AppColors.primary),
                               ),
                             );
                           }
@@ -187,8 +172,8 @@ class FlightResultPage extends StatelessWidget {
                           // Normal Flight Card
                           final FlightModel flight = flights[index];
                           return UniversalTicketCard(
-                            cardHeight: Get.height * 0.32,
-                            dividerPosition: Get.height * 0.3 * 0.65,
+                            cardHeight: Get.height * 0.33,
+                            dividerPosition: (Get.height * 0.32) * 0.65,
                             topContent: _buildTopContent(flight),
                             bottomContent: _buildBottomContent(flight),
                           );
@@ -217,13 +202,11 @@ class FlightResultPage extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // CircleAvatar(backgroundImage: NetworkImage(flight.airlineLogo),),
             CircleAvatar(
-              radius: 25,
-              child: Image(
-                image: NetworkImage(flight.airlineLogo),
-                fit: BoxFit.cover,
-              ),
+              backgroundColor: Colors.green.shade50,
+              radius: 18,
+              backgroundImage: NetworkImage(flight.airlineLogo),
+              child: const Icon(Icons.flight, color: Colors.green, size: 20),
             ),
             const SizedBox(width: 10),
             Expanded(
@@ -270,10 +253,7 @@ class FlightResultPage extends StatelessWidget {
             Column(
               children: [
                 Image.asset("assets/flight-icon.png", height: 30),
-                Text(
-                  flight.duration,
-                  style: const TextStyle(fontSize: 12, color: Colors.black54),
-                ),
+                Text(flight.duration, style: const TextStyle(fontSize: 12, color: Colors.black54)),
               ],
             ),
             Column(
@@ -322,10 +302,7 @@ class FlightResultPage extends StatelessWidget {
                 color: AppColors.primary,
               ),
             ),
-            const Text(
-              "/person",
-              style: TextStyle(fontSize: 12, color: Colors.black54),
-            ),
+            const Text("/person", style: TextStyle(fontSize: 12, color: Colors.black54)),
           ],
         ),
         CommonButton(
@@ -350,12 +327,10 @@ class FlightResultPage extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           children:
               flightController.sortOptions.map((item) {
-                final isSelected =
-                    item == flightController.selectedSortOption.value;
+                final isSelected = item == flightController.selectedSortOption.value;
                 return GestureDetector(
                   onTap: () {
-                    if (flightController.selectedSortOption.value == item)
-                      return;
+                    if (flightController.selectedSortOption.value == item) return;
                     flightController.selectedSortOption.value = item;
                     flightController.findFlights(navigate: false);
                   },
@@ -374,10 +349,7 @@ class FlightResultPage extends StatelessWidget {
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       child: Center(
-        child: Text(
-          title,
-          style: TextStyle(color: isSelected ? Colors.white : Colors.black),
-        ),
+        child: Text(title, style: TextStyle(color: isSelected ? Colors.white : Colors.black)),
       ),
     ),
   );
@@ -410,12 +382,7 @@ class _FilterSheet extends StatelessWidget {
   final VoidCallback onApply;
   final VoidCallback onReset;
 
-  static const List<String> _filterKeys = [
-    'Airline',
-    'Price Range',
-    'Stops',
-    'Aircraft Type',
-  ];
+  static const List<String> _filterKeys = ['Airline', 'Price Range', 'Stops', 'Aircraft Type'];
 
   // stop options: -1 = Any, 0 = Non-stop, 1 = 1 Stop, 2 = 2+ Stops
   static const List<Map<String, dynamic>> _stopOptions = [
@@ -432,9 +399,7 @@ class _FilterSheet extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * 0.85,
-      ),
+      constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.85),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -457,10 +422,7 @@ class _FilterSheet extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Filters',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
+                const Text('Filters', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 TextButton(
                   onPressed: onReset,
                   child: Text(
@@ -497,30 +459,19 @@ class _FilterSheet extends StatelessWidget {
 
           // ── apply button ─────────────────────────────────────
           Padding(
-            padding: EdgeInsets.fromLTRB(
-              20,
-              14,
-              20,
-              MediaQuery.of(context).padding.bottom + 14,
-            ),
+            padding: EdgeInsets.fromLTRB(20, 14, 20, MediaQuery.of(context).padding.bottom + 14),
             child: SizedBox(
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                 ),
                 onPressed: onApply,
                 child: const Text(
                   'Apply Filters',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: Colors.white),
                 ),
               ),
             ),
@@ -535,15 +486,11 @@ class _FilterSheet extends StatelessWidget {
   String _subtitle(String key) {
     switch (key) {
       case 'Airline':
-        return filterAirline.value.isEmpty
-            ? 'All airlines'
-            : filterAirline.value;
+        return filterAirline.value.isEmpty ? 'All airlines' : filterAirline.value;
       case 'Price Range':
         final min = filterPriceMin.value.toStringAsFixed(0);
         final max =
-            filterPriceMax.value >= priceMax
-                ? 'Any'
-                : filterPriceMax.value.toStringAsFixed(0);
+            filterPriceMax.value >= priceMax ? 'Any' : filterPriceMax.value.toStringAsFixed(0);
         return '\$$min – \$$max';
       case 'Stops':
         final match = _stopOptions.firstWhere(
@@ -552,9 +499,7 @@ class _FilterSheet extends StatelessWidget {
         );
         return match['label'] as String;
       case 'Aircraft Type':
-        return filterAircraftType.value.isEmpty
-            ? 'All types'
-            : filterAircraftType.value;
+        return filterAircraftType.value.isEmpty ? 'All types' : filterAircraftType.value;
       default:
         return '';
     }
@@ -589,10 +534,7 @@ class _FilterSheet extends StatelessWidget {
                   isDense: true,
                   hintText: 'Search airlines...',
                   border: OutlineInputBorder(),
-                  contentPadding: EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 12,
-                  ),
+                  contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                 ),
                 onChanged: controller.onAirlineSearchChanged,
               ),
@@ -606,8 +548,7 @@ class _FilterSheet extends StatelessWidget {
                       return _ChoiceChip(
                         label: airline,
                         selected: selected,
-                        onTap:
-                            () => filterAirline.value = selected ? '' : airline,
+                        onTap: () => filterAirline.value = selected ? '' : airline,
                       );
                     }).toList(),
               ),
@@ -625,19 +566,13 @@ class _FilterSheet extends StatelessWidget {
                 children: [
                   Text(
                     '\$${filterPriceMin.value.toStringAsFixed(0)}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 13,
-                    ),
+                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
                   ),
                   Text(
                     filterPriceMax.value >= priceMax
                         ? 'Any'
                         : '\$${filterPriceMax.value.toStringAsFixed(0)}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 13,
-                    ),
+                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
                   ),
                 ],
               ),
@@ -699,10 +634,7 @@ class _FilterSheet extends StatelessWidget {
                   isDense: true,
                   hintText: 'Search aircraft types...',
                   border: OutlineInputBorder(),
-                  contentPadding: EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 12,
-                  ),
+                  contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                 ),
                 onChanged: controller.onAircraftTypeSearchChanged,
               ),
@@ -716,9 +648,7 @@ class _FilterSheet extends StatelessWidget {
                       return _ChoiceChip(
                         label: type,
                         selected: selected,
-                        onTap:
-                            () =>
-                                filterAircraftType.value = selected ? '' : type,
+                        onTap: () => filterAircraftType.value = selected ? '' : type,
                       );
                     }).toList(),
               ),
@@ -765,26 +695,15 @@ class _FilterSection extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 15,
-                        ),
+                        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
                       ),
                       const SizedBox(height: 2),
-                      Text(
-                        subtitle,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey.shade500,
-                        ),
-                      ),
+                      Text(subtitle, style: TextStyle(fontSize: 12, color: Colors.grey.shade500)),
                     ],
                   ),
                 ),
                 Icon(
-                  isExpanded
-                      ? Icons.keyboard_arrow_up_rounded
-                      : Icons.keyboard_arrow_down_rounded,
+                  isExpanded ? Icons.keyboard_arrow_up_rounded : Icons.keyboard_arrow_down_rounded,
                   color: Colors.grey.shade600,
                 ),
               ],
@@ -793,12 +712,8 @@ class _FilterSection extends StatelessWidget {
         ),
         AnimatedCrossFade(
           firstChild: const SizedBox.shrink(),
-          secondChild: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-            child: content,
-          ),
-          crossFadeState:
-              isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+          secondChild: Padding(padding: const EdgeInsets.fromLTRB(20, 0, 20, 16), child: content),
+          crossFadeState: isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
           duration: const Duration(milliseconds: 200),
         ),
         const Divider(height: 1),
@@ -810,11 +725,7 @@ class _FilterSection extends StatelessWidget {
 // ─── Reusable choice chip ─────────────────────────────────────────────────────
 
 class _ChoiceChip extends StatelessWidget {
-  const _ChoiceChip({
-    required this.label,
-    required this.selected,
-    required this.onTap,
-  });
+  const _ChoiceChip({required this.label, required this.selected, required this.onTap});
 
   final String label;
   final bool selected;
@@ -830,9 +741,7 @@ class _ChoiceChip extends StatelessWidget {
         decoration: BoxDecoration(
           color: selected ? AppColors.primary : Colors.grey.shade100,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: selected ? AppColors.primary : Colors.grey.shade300,
-          ),
+          border: Border.all(color: selected ? AppColors.primary : Colors.grey.shade300),
         ),
         child: Text(
           label,
