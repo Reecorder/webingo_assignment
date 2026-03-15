@@ -1,3 +1,4 @@
+import "package:booking_app/app/widgets/common_button.dart";
 import "package:flutter/services.dart";
 import "package:gal/gal.dart";
 import "package:booking_app/app/theme/app_colors.dart";
@@ -299,19 +300,12 @@ class _FlightDetailsPageState extends State<FlightDetailsPage> {
     decoration: const BoxDecoration(color: Color(0xFFEFF2F9)),
     child: SafeArea(
       top: false,
-      child: ElevatedButton(
-        //  Trigger the save function
-        onPressed: saveTicket,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.black,
-          minimumSize: const Size(double.infinity, 56),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-          elevation: 0,
-        ),
-        child: const Text(
-          'Download & Save pass',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
-        ),
+      child: CommonButton(
+        width: Get.width,
+        buttonText: 'Download & Save pass',
+        onChanged: () {
+          saveTicket();
+        },
       ),
     ),
   );
